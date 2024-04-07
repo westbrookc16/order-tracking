@@ -18,6 +18,7 @@ async function main() {
       email: "westbchris@gmail.com",
       name: "Chris Westbrook",
       clientId: 1,
+      isAdmin: true,
     },
   });
   await prisma.client.upsert({
