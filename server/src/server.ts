@@ -6,7 +6,7 @@ import {
 } from "@clerk/clerk-sdk-node";
 import express, { Express, Request, Response } from "express";
 //create an express api server that listens on port 3001
-import "./types/bigint.ts";
+
 const app: Express = express();
 const port = 3001;
 app.use(require("cors")());

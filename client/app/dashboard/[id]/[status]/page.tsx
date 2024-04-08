@@ -76,7 +76,7 @@ export default function Page() {
       ) : (
         <div>
           <h1>
-            {status} for {client.name}
+            {status} for {client?.name}
           </h1>
           <DataTable columns={columns} data={data} />
         </div>
