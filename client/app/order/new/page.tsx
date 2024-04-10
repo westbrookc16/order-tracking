@@ -1,9 +1,9 @@
-"use client";
-import { useAuth } from "@clerk/nextjs";
-import { getClients } from "@/actions/client";
-import OrderForm from "@/components/orderForm";
-import { useQuery } from "@tanstack/react-query";
-import invariant from "tiny-invariant";
+'use client';
+import { useAuth } from '@clerk/nextjs';
+import { getClients } from '@/actions/client';
+import OrderForm from '@/components/orderForm';
+import { useQuery } from '@tanstack/react-query';
+import invariant from 'tiny-invariant';
 export default function NewOrderPage() {
   const {
     data: clients,
@@ -11,37 +11,46 @@ export default function NewOrderPage() {
     isError,
     error,
   } = useQuery({
-    queryKey: ["clients"],
+    queryKey: ['clients'],
     queryFn: () => {
       return getClients();
     },
   });
   const { userId } = useAuth();
-  invariant(userId, "User ID should be defined");
+  invariant(userId, 'User ID should be defined');
   return (
-    <div>
-      {isError && <div>{error.message}</div>}
-      <h1>add New Order</h1>
-      {isSuccess && (
-        <OrderForm
-          order={{
-            name: "",
-            id: undefined,
-            clientId: undefined,
-            updatedAt: undefined,
-            description: "",
-            clientDueDate: undefined,
-            agencyDueDate: undefined,
-            status: "Pending",
-            quantity: 1,
+    <div className='bg-slate-200'>
+      <div className='container mx-auto flex justify-center items-center flex-col'>
+        <h1 className='font-semibold p-5 md:text-lg text-slate-800'>
+          New Order
+        </h1>
+        {isError && (
+          <div className='text-center text-red-500 text-lg font-semibold'>
+            {error.message}
+          </div>
+        )}
 
-            createdAt: new Date(),
+        {isSuccess && (
+          <OrderForm
+            order={{
+              name: '',
+              id: undefined,
+              clientId: undefined,
+              updatedAt: undefined,
+              description: '',
+              clientDueDate: undefined,
+              agencyDueDate: undefined,
+              status: 'Pending',
+              quantity: 1,
 
-            userId: userId,
-          }}
-          clients={clients}
-        />
-      )}
+              createdAt: new Date(),
+
+              userId: userId,
+            }}
+            clients={clients}
+          />
+        )}
+      </div>
     </div>
   );
 }
